@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>المدار | Al-Madar Technology Store — صنعاء</title>
+<meta name="description" content="متجر أونلاين في صنعاء لملحقات الكمبيوتر واللابتوب وكابلات الشبكات والكاميرات.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0A0A; --paper:#FFFFFF; --surface:#F2F3F5; --line:#E1E3E7;
+  --muted:#575D66; --gold:#D4AF37; --gold-deep:#7A5F12;
+  --ok:#17653A; --warn:#8A5A00; --bad:#9B2C2C;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Cairo","Segoe UI",Tahoma,Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.7;font-size:16px}
+img,svg{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{width:min(1100px,100% - 32px);margin-inline:auto}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand svg{width:42px;height:42px}
+.brand b{display:block;font-size:22px;font-weight:800;line-height:1.1}
+.brand small{display:block;font-size:11px;letter-spacing:.22em;color:var(--gold-deep);font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 20px;border-radius:999px;border:2px solid var(--ink);background:var(--ink);color:#fff;font:inherit;font-weight:600;text-decoration:none;cursor:pointer}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.btn.ghost{background:transparent;color:inherit}
+.btn[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.top .btn{min-height:40px;padding:4px 16px;font-size:14px}
+
+/* hero */
+.hero{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.hero .wrap{position:relative;display:grid;gap:8px;padding-block:44px 52px}
+.hero h1{margin:0;font-size:clamp(30px,6.4vw,54px);line-height:1.25;font-weight:800;max-width:15ch}
+.hero p{margin:12px 0 22px;max-width:36ch;color:#D7D9DD;font-size:18px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero .btn.ghost{border-color:#fff;color:#fff}
+.orbit{position:absolute;left:-150px;top:-150px;width:300px;height:300px;opacity:.9;pointer-events:none}
+.orbit .spin{transform-origin:150px 150px;transform-box:view-box;animation:spin 48s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (min-width:820px){
+  .hero .wrap{padding-block:84px 90px}
+  .orbit{left:4%;top:50%;bottom:auto;transform:translateY(-50%);width:460px;height:460px}
+}
+@media (prefers-reduced-motion:reduce){.orbit .spin{animation:none}html{scroll-behavior:auto}}
+
+section{padding-block:44px;scroll-margin-top:72px}
+h2{margin:0 0 6px;font-size:26px;font-weight:800;line-height:1.3}
+.lead{margin:0 0 22px;color:var(--muted)}
+
+/* categories */
+.cats{display:grid;gap:12px;grid-template-columns:1fr}
+@media (min-width:620px){.cats{grid-template-columns:1fr 1fr}}
+@media (min-width:960px){.cats{grid-template-columns:repeat(3,1fr)}}
+.cat{display:block;text-align:start;width:100%;font:inherit;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 16px;cursor:pointer;border-inline-start:6px solid var(--gold)}
+.cat:hover{background:#E9EBEE}
+.cat strong{display:block;font-size:19px}
+.cat span{display:block;color:var(--muted);font-size:14px;margin-top:2px}
+
+/* products */
+.tools{display:grid;gap:12px;margin-bottom:18px}
+.search{width:100%;min-height:48px;padding:8px 16px;border:2px solid var(--line);border-radius:999px;font:inherit;background:var(--paper)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.chip{flex:none;min-height:40px;padding:4px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);font:inherit;font-size:15px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.grid{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+@media (min-width:760px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:1000px){.grid{grid-template-columns:repeat(4,1fr)}}
+.card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--paper)}
+.thumb{aspect-ratio:4/3;background:var(--surface);display:grid;place-items:center;position:relative}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb svg{width:44%;opacity:.35}
+.tag{position:absolute;top:8px;inset-inline-start:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:0 10px;font-size:12px;font-weight:600}
+.tag.ok{color:var(--ok)} .tag.limited,.tag.order{color:var(--warn)} .tag.out{color:var(--bad)}
+.tag.demo{inset-inline-start:auto;inset-inline-end:8px;background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.body{padding:12px 12px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.body h3{margin:0;font-size:16px;line-height:1.4}
+.meta{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.price{font-weight:800;font-size:17px}
+.actions{margin-top:auto;display:grid;gap:8px;padding-top:10px}
+.actions .btn{min-height:42px;padding:4px 12px;font-size:14px}
+.empty{border:2px dashed var(--line);border-radius:var(--radius);padding:30px 20px;text-align:center;color:var(--muted)}
+.empty b{display:block;color:var(--ink);font-size:18px;margin-bottom:4px}
+.demo-bar{background:var(--gold);color:var(--ink);padding:8px 16px;text-align:center;font-weight:600;font-size:14px}
+
+/* steps / about / contact */
+.steps{display:grid;gap:12px;counter-reset:s;padding:0;margin:0;list-style:none}
+@media (min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
+.steps li{counter-increment:s;background:var(--surface);border-radius:var(--radius);padding:16px 18px;border:1px solid var(--line)}
+.steps li::before{content:counter(s);display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--gold);font-weight:800;margin-inline-end:8px}
+.steps b{font-size:17px}
+.steps p{margin:6px 0 0;color:var(--muted);font-size:15px}
+.band{background:var(--surface)}
+.contact{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.note{color:var(--muted);font-size:14px;margin-top:10px}
+footer{background:var(--ink);color:#C9CCD1;padding-block:26px;font-size:14px}
+footer b{color:#fff}
+
+/* dialog */
+dialog{border:0;border-radius:18px;padding:0;width:min(560px,calc(100% - 24px));max-height:88vh;overflow:auto}
+dialog::backdrop{background:rgba(10,10,10,.6)}
+.dlg{padding:20px}
+.dlg h3{margin:0 0 8px;font-size:22px}
+.dlg dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:14px 0}
+.dlg dt{color:var(--muted)} .dlg dd{margin:0}
+.close{float:inline-start;min-height:40px}
+</style>
+</head>
+<body>
+
+<div id="demoBar" class="demo-bar" hidden>وضع تجريبي: المنتجات المعروضة بيانات تصميم فقط وليست منتجات حقيقية</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="المدار - الصفحة الرئيسية">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="36" fill="none" stroke="#0A0A0A" stroke-width="9" stroke-linecap="round" stroke-dasharray="190 36.2"/>
+        <circle cx="81.6" cy="32.7" r="7.5" fill="#D4AF37"/>
+        <circle cx="50" cy="50" r="21" fill="none" stroke="#D4AF37" stroke-width="9" stroke-linecap="round" stroke-dasharray="95 37" transform="rotate(180 50 50)"/>
+        <circle cx="50" cy="50" r="7" fill="#0A0A0A"/>
+      </svg>
+      <span><b>المدار</b><small id="brandEn">AL-MADAR TECHNOLOGY</small></span>
+    </a>
+    <a class="btn gold js-wa" href="#" data-msg="السلام عليكم، أريد الاستفسار عن منتج">واتساب</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <svg class="orbit" viewBox="0 0 300 300" aria-hidden="true">
+      <circle cx="150" cy="150" r="124" fill="none" stroke="#D4AF37" stroke-width="3" opacity=".55"/>
+      <circle cx="150" cy="150" r="84" fill="none" stroke="#FFFFFF" stroke-width="3" opacity=".28"/>
+      <g class="spin"><circle cx="274" cy="150" r="11" fill="#D4AF37"/></g>
+      <circle cx="150" cy="150" r="9" fill="#D4AF37"/>
+    </svg>
+    <div class="wrap">
+      <h1>ملحقات الكمبيوتر والشبكات في صنعاء</h1>
+      <p>متجر أونلاين. أرسل لنا اسم القطعة وموديل جهازك ونرد عليك.</p>
+      <div class="cta">
+        <a class="btn gold js-wa" href="#" data-msg="السلام عليكم، أريد الاستفسار عن منتج">اطلب عبر واتساب</a>
+        <a class="btn ghost" href="#categories">تصفح الأقسام</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="categories">
+    <div class="wrap">
+      <h2>الأقسام</h2>
+      <p class="lead">اختر قسماً لعرض منتجاته.</p>
+      <div class="cats" id="cats"></div>
+    </div>
+  </section>
+
+  <section id="products" class="band">
+    <div class="wrap">
+      <h2>المنتجات</h2>
+      <div class="tools">
+        <label class="sr" for="q" hidden>بحث</label>
+        <input class="search" id="q" type="search" placeholder="ابحث باسم المنتج أو الموديل" autocomplete="off">
+        <div class="chips" id="chips" role="group" aria-label="تصفية حسب القسم"></div>
+      </div>
+      <div class="grid" id="grid" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <h2>كيف تطلب</h2>
+      <ol class="steps">
+        <li><b>اختر المنتج</b><p>من الموقع، أو اكتب لنا اسم ما تبحث عنه.</p></li>
+        <li><b>أرسل موديل جهازك</b><p>في البطاريات والشاشات والمحولات، الموديل ضروري لمعرفة القطعة المناسبة.</p></li>
+        <li><b>نؤكد لك التفاصيل</b><p>نرد عليك بالتوفر والسعر وخطوات الطلب.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="about" class="band">
+    <div class="wrap">
+      <h2>من نحن</h2>
+      <p class="lead" style="max-width:62ch">المدار متجر أونلاين في صنعاء يبيع ملحقات وقطع الكمبيوتر واللابتوب، وكابلات الشبكات، والكاميرات والمعدات التقنية. نعمل عبر واتساب والموقع، وليس لدينا محل مفتوح للزبائن.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2>تواصل معنا</h2>
+      <div class="contact">
+        <a class="btn gold js-wa" href="#" data-msg="السلام عليكم، أريد الاستفسار">راسلنا على واتساب</a>
+        <a class="btn ghost" id="mail" href="#" hidden></a>
+      </div>
+      <p class="note" id="waNote" hidden>الطلب عبر واتساب سيُفعَّل قريباً.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><b>المدار | AL-MADAR TECHNOLOGY</b> — <span id="city"></span></div>
+</footer>
+
+<dialog id="dlg" aria-labelledby="dlgTitle"><div class="dlg" id="dlgBody"></div></dialog>
+
+<script src="config.js"></script>
+<script src="products.js"></script>
+<script>
+(function(){
+  var CFG = window.ALMADAR_CONFIG;
+  var demo = new URLSearchParams(location.search).get("demo") === "1";
+  var DATA = (window.ALMADAR_PRODUCTS || []).slice();
+  if(demo){ DATA = DATA.concat(window.ALMADAR_DEMO || []).map(function(p){ return Object.assign({demo:true}, p); }); document.getElementById("demoBar").hidden = false; }
+
+  var AV = { available:"متوفر", limited:"كمية محدودة", order:"حسب الطلب", out:"غير متوفر" };
+  var state = { q:"", cat:"all" };
+  var $ = function(id){ return document.getElementById(id); };
+  var LOGO = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="36" fill="none" stroke="#0A0A0A" stroke-width="9" stroke-linecap="round" stroke-dasharray="190 36.2"/><circle cx="81.6" cy="32.7" r="7.5" fill="#D4AF37"/><circle cx="50" cy="50" r="21" fill="none" stroke="#D4AF37" stroke-width="9" stroke-linecap="round" stroke-dasharray="95 37" transform="rotate(180 50 50)"/><circle cx="50" cy="50" r="7" fill="#0A0A0A"/></svg>';
+
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+  function catName(id){ var c = CFG.categories.filter(function(x){ return x.id === id; })[0]; return c ? c.name : ""; }
+  function waHref(msg){ return CFG.whatsapp ? "https://wa.me/" + encodeURIComponent(CFG.whatsapp) + "?text=" + encodeURIComponent(msg) : null; }
+
+  function wireWhatsApp(root){
+    (root || document).querySelectorAll(".js-wa").forEach(function(a){
+      var href = waHref(a.getAttribute("data-msg") || "");
+      if(href){ a.href = href; a.target = "_blank"; a.rel = "noopener"; a.removeAttribute("aria-disabled"); }
+      else { a.removeAttribute("href"); a.setAttribute("aria-disabled","true"); a.setAttribute("role","link"); a.title = "الطلب عبر واتساب سيُفعَّل قريباً"; }
+    });
+    $("waNote").hidden = !!CFG.whatsapp;
+  }
+
+  function renderCats(){
+    $("cats").innerHTML = CFG.categories.map(function(c){
+      return '<button class="cat" type="button" data-cat="' + esc(c.id) + '"><strong>' + esc(c.name) + '</strong><span>' + esc(c.note) + '</span></button>';
+    }).join("");
+    $("cats").querySelectorAll(".cat").forEach(function(b){
+      b.addEventListener("click", function(){ state.cat = b.getAttribute("data-cat"); renderChips(); renderGrid(); $("products").scrollIntoView(); });
+    });
+  }
+
+  function renderChips(){
+    var items = [{id:"all", name:"الكل"}].concat(CFG.categories);
+    $("chips").innerHTML = items.map(function(c){
+      return '<button class="chip" type="button" data-cat="' + esc(c.id) + '" aria-pressed="' + (state.cat === c.id) + '">' + esc(c.name) + '</button>';
+    }).join("");
+    $("chips").querySelectorAll(".chip").forEach(function(b){
+      b.addEventListener("click", function(){ state.cat = b.getAttribute("data-cat"); renderChips(); renderGrid(); });
+    });
+  }
+
+  function priceText(p){
+    if(!CFG.showPrices) return "";
+    if(p.price == null || p.price === "") return "السعر عند الاستفسار";
+    return Number(p.price).toLocaleString("en-US") + (p.currency ? " " + p.currency : "");
+  }
+
+  function card(p, i){
+    var img = (p.images && p.images[0]) ? '<img src="' + esc(p.images[0]) + '" alt="' + esc(p.name) + '" loading="lazy">' : LOGO;
+    var av = p.availability && AV[p.availability] ? '<span class="tag ' + (p.availability === "available" ? "ok" : p.availability) + '">' + AV[p.availability] + '</span>' : "";
+    var dm = p.demo ? '<span class="tag demo">تجريبي</span>' : "";
+    var sub = [p.brand, p.model].filter(Boolean).join(" · ");
+    var pr = priceText(p);
+    var msg = "السلام عليكم، أريد الاستفسار عن: " + p.name + (p.sku ? " (" + p.sku + ")" : "");
+    return '<article class="card"><div class="thumb">' + img + av + dm + '</div><div class="body"><h3>' + esc(p.name) + '</h3>' +
+      (sub ? '<p class="meta">' + esc(sub) + '</p>' : '') +
+      (pr ? '<p class="price">' + esc(pr) + '</p>' : '') +
+      '<div class="actions"><button class="btn ghost" type="button" data-i="' + i + '">التفاصيل</button>' +
+      '<a class="btn gold js-wa" href="#" data-msg="' + esc(msg) + '">اطلب عبر واتساب</a></div></div></article>';
+  }
+
+  function renderGrid(){
+    var q = state.q.trim().toLowerCase();
+    var list = DATA.map(function(p, i){ return {p:p, i:i}; }).filter(function(x){
+      if(state.cat !== "all" && x.p.category !== state.cat) return false;
+      if(!q) return true;
+      return [x.p.name, x.p.brand, x.p.model, x.p.compat, x.p.sku].join(" ").toLowerCase().indexOf(q) > -1;
+    });
+    var g = $("grid");
+    if(!DATA.length){
+      g.style.display = "block";
+      g.innerHTML = '<div class="empty"><b>المنتجات قيد الإضافة</b>راسلنا بما تبحث عنه وسنخبرك بما هو متوفر.</div>';
+    } else if(!list.length){
+      g.style.display = "block";
+      g.innerHTML = '<div class="empty"><b>لا نتائج مطابقة</b>جرّب كلمة أخرى، أو راسلنا بما تبحث عنه.</div>';
+    } else {
+      g.style.display = "";
+      g.innerHTML = list.map(function(x){ return card(x.p, x.i); }).join("");
+      g.querySelectorAll("button[data-i]").forEach(function(b){ b.addEventListener("click", function(){ openDlg(DATA[+b.getAttribute("data-i")]); }); });
+    }
+    wireWhatsApp(g);
+  }
+
+  function openDlg(p){
+    var rows = [["القسم", catName(p.category)], ["الماركة", p.brand], ["الموديل", p.model], ["التوافق", p.compat], ["المواصفات", p.specs],
+                ["الحالة", AV[p.availability]], ["الضمان", p.warranty], ["السعر", priceText(p)], ["ملاحظات", p.notes]]
+      .filter(function(r){ return r[1]; })
+      .map(function(r){ return "<dt>" + r[0] + "</dt><dd>" + esc(r[1]) + "</dd>"; }).join("");
+    var msg = "السلام عليكم، أريد الاستفسار عن: " + p.name + (p.sku ? " (" + p.sku + ")" : "");
+    $("dlgBody").innerHTML = '<button class="btn ghost close" type="button" id="dlgClose">إغلاق</button><h3 id="dlgTitle">' + esc(p.name) + '</h3>' +
+      (rows ? "<dl>" + rows + "</dl>" : "") +
+      '<a class="btn gold js-wa" href="#" data-msg="' + esc(msg) + '">اطلب عبر واتساب</a>';
+    $("dlgClose").addEventListener("click", function(){ $("dlg").close(); });
+    wireWhatsApp($("dlgBody"));
+    $("dlg").showModal();
+  }
+  $("dlg").addEventListener("click", function(e){ if(e.target === $("dlg")) $("dlg").close(); });
+
+  $("q").addEventListener("input", function(e){ state.q = e.target.value; renderGrid(); });
+  $("brandEn").textContent = CFG.storeNameEn;
+  $("city").textContent = CFG.city;
+  if(CFG.email){ var m = $("mail"); m.hidden = false; m.href = "mailto:" + CFG.email; m.textContent = CFG.email; }
+
+  renderCats(); renderChips(); renderGrid(); wireWhatsApp();
+})();
+</script>
+</body>
+</html>
