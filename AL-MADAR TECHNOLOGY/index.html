@@ -1,1092 +1,716 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="dark">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر المدار للتكنولوجيا | Al-Madar Technology Store - صنعاء</title>
-    <meta name="description" content="وجهتك الأولى لملحقات الكمبيوتر، اللابتوبات، وأجهزة الشبكات والإلكترونيات في صنعاء، اليمن. توصيل سريع لكافة مناطق صنعاء.">
-    
-    <!-- خط كايرو (Cairo) من خطوط جوجل لمظهر تقني عربي عصري -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- أيقونات FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- مكتبة Tailwind CSS للتصميم المتجاوب -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Cairo', 'sans-serif'],
-                    },
-                    colors: {
-                        madar: {
-                            gold: '#f59e0b',
-                            goldLight: '#fbbf24',
-                            blue: '#0284c7',
-                            dark: '#0f172a',
-                            card: '#1e293b'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>متجر المدار للتكنولوجيا | Al-Madar Technology Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body {
+        :root {
+            --bg: #0b1120;
+            --surface: #151f32;
+            --surface-2: #1e293b;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #0ea5e9;
+            --accent: #f59e0b;
+            --border: #26334d;
+            --success: #10b981;
+        }
+
+        body.light-mode {
+            --bg: #f1f5f9;
+            --surface: #ffffff;
+            --surface-2: #e2e8f0;
+            --text: #0f172a;
+            --text-muted: #475569;
+            --border: #cbd5e1;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             font-family: 'Cairo', sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
             scroll-behavior: smooth;
         }
-        /* تخصيص شريط التمرير */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+
+        /* الشريط الترحيبي العلوي مع الروابط */
+        .top-bar {
+            background: linear-gradient(90deg, #0284c7, #0ea5e9, #f59e0b);
+            color: #fff;
+            text-align: center;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
+        .top-bar-links {
+            display: inline-flex;
+            gap: 8px;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
+        .top-bar a {
+            background: rgba(0, 0, 0, 0.25);
+            color: #fff;
+            text-decoration: none;
+            padding: 2px 10px;
+            border-radius: 99px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            transition: 0.2s;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #f59e0b;
+        .top-bar a:hover {
+            background: rgba(0, 0, 0, 0.45);
         }
-        .glass-header {
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+
+        /* الهيدر المتجاوب */
+        header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 12px 15px;
+            width: 100%;
         }
-        .orbit-spin {
-            animation: spinSlow 16s linear infinite;
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
-        @keyframes spinSlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            width: 100%;
         }
-        .product-card {
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
         }
-        .product-card:hover {
-            transform: translateY(-6px);
+        .logo-ar {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--accent);
+        }
+        .logo-en {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .currency-select {
+            background: var(--surface-2);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 6px 10px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .theme-btn {
+            background: var(--surface-2);
+            color: var(--accent);
+            border: 1px solid var(--border);
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .cart-btn {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 7px 14px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .cart-badge {
+            background: #000;
+            color: #fff;
+            border-radius: 99px;
+            padding: 1px 7px;
+            font-size: 0.8rem;
+        }
+
+        .search-wrapper {
+            width: 100%;
+        }
+        .search-input {
+            width: 100%;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .search-input:focus {
+            border-color: var(--accent);
+        }
+
+        /* القسم الترحيبي */
+        .hero {
+            padding: 2rem 15px;
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(245, 158, 11, 0.12), transparent 70%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            padding: 5px 14px;
+            border-radius: 99px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 1.75rem;
+            font-weight: 900;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: #000;
+            text-decoration: none;
+            padding: 10px 22px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.95rem;
+        }
+
+        .social-hero-btn {
+            display: inline-block;
+            background: var(--surface-2);
+            color: var(--text);
+            border: 1px solid var(--border);
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        /* أزرار الأقسام */
+        .categories {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+            scrollbar-width: none;
+        }
+        .categories::-webkit-scrollbar { display: none; }
+
+        .cat-btn {
+            background: var(--surface);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 99px;
+            white-space: nowrap;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .cat-btn.active {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        /* شبكة المنتجات */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 15px;
+            padding: 10px 15px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card-cat {
+            font-size: 0.75rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        .card-icon {
+            font-size: 2.8rem;
+            text-align: center;
+            margin: 12px 0;
+        }
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+        .card-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            padding-top: 12px;
+        }
+        .price {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--success);
+        }
+        .add-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        /* تذييل الصفحة (Footer) مع روابط التواصل */
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 30px 15px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .footer-title {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: #fff;
+        }
+        .insta-btn {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+        .fb-btn {
+            background: #1877F2;
+        }
+
+        /* نافذة السلة */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+        .modal.open { display: flex; }
+        .modal-content {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 460px;
+            padding: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+        .qty-btns button {
+            background: var(--surface-2);
+            color: var(--text);
+            border: 1px solid var(--border);
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .form-group { margin-top: 12px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px; }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface-2);
+            color: var(--text);
+        }
+        .whatsapp-btn {
+            width: 100%;
+            background: #25D366;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 1rem;
+            margin-top: 16px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 480px) {
+            .logo-ar { font-size: 1.05rem; }
+            .logo-en { font-size: 0.6rem; }
+            .currency-select { padding: 5px 8px; font-size: 0.78rem; }
+            .cart-btn { padding: 6px 10px; font-size: 0.82rem; }
+            .theme-btn { width: 34px; height: 34px; }
+            .hero h1 { font-size: 1.45rem; }
+            .products-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col">
+<body>
 
-    <!-- شريط الإعلانات العلوي -->
-    <div class="bg-gradient-to-l from-amber-500 via-amber-600 to-sky-700 text-white text-xs sm:text-sm py-2 px-4 text-center font-semibold shadow-sm">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-2 sm:gap-6">
-            <span><i class="fa-solid fa-bolt text-yellow-200 ml-1"></i> مرحباً بكم في متجر المدار للتكنولوجيا - صنعاء</span>
-            <span class="hidden sm:inline">|</span>
-            <span><i class="fa-solid fa-truck-fast ml-1"></i> توصيل سريع لكافة مناطق وأحياء صنعاء</span>
-            <span class="hidden md:inline">|</span>
-            <a href="https://www.instagram.com/almadar.technology" target="_blank" class="underline hover:text-yellow-200 transition">
-                <i class="fa-brands fa-instagram ml-1"></i> تابعنا: @almadar.technology
-            </a>
+<div class="top-bar">
+    <span>🚚 متجر المدار للتكنولوجيا - توصيل سريع لكافة مناطق صنعاء</span>
+    <div class="top-bar-links">
+        <a href="https://www.instagram.com/almadar.technology" target="_blank">📸 إنستغرام</a>
+        <a href="https://www.facebook.com/share/1coWXX68kv/" target="_blank">📘 فيسبوك</a>
+    </div>
+</div>
+
+<header>
+    <div class="header-container">
+        <div class="header-top">
+            <div class="logo">
+                <span class="logo-ar">⚡ المدار للتكنولوجيا</span>
+                <span class="logo-en">AL-MADAR TECHNOLOGY STORE</span>
+            </div>
+            <div class="controls">
+                <select id="currency" class="currency-select" onchange="renderProducts(); updateCartUI();">
+                    <option value="YER">🇾🇪 ريال يمني (ر.ي)</option>
+                    <option value="USD">🇺🇸 دولار ($)</option>
+                    <option value="SAR">🇸🇦 ريال سعودي (ر.س)</option>
+                </select>
+                <button class="theme-btn" onclick="toggleTheme()" title="تبديل المظهر">☀️</button>
+                <button class="cart-btn" onclick="toggleCart()">
+                    🛒 <span class="cart-badge" id="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+        <div class="search-wrapper">
+            <input type="text" id="search" class="search-input" placeholder="ابحث عن منتج (شاحن، كابل، كاميرا، لابتوب، راوتر)..." oninput="renderProducts()">
         </div>
     </div>
+</header>
 
-    <!-- الهيدر وشريط التنقل -->
-    <header class="sticky top-0 z-40 glass-header bg-white/85 dark:bg-slate-900/85 border-b border-slate-200 dark:border-slate-800 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-            <div class="flex items-center justify-between gap-3">
-                
-                <!-- الشعار والهوية -->
-                <a href="#" class="flex items-center gap-3 group">
-                    <div class="relative w-12 h-12 rounded-2xl bg-slate-900 dark:bg-slate-800 border border-amber-500/40 flex items-center justify-center shadow-md group-hover:border-amber-400 transition">
-                        <!-- أيقونة شعار المدار المستوحاة من شعار المتجر -->
-                        <svg class="w-9 h-9" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="7" stroke-dasharray="180 60" class="text-white dark:text-slate-100 orbit-spin" />
-                            <circle cx="50" cy="50" r="24" stroke="#f59e0b" stroke-width="7" stroke-dasharray="110 40" />
-                            <circle cx="50" cy="50" r="9" fill="currentColor" class="text-white dark:text-slate-100" />
-                            <circle cx="74" cy="30" r="7" fill="#f59e0b" />
-                        </svg>
-                    </div>
+<section class="hero">
+    <div class="hero-badge">🚚 ضمان وجودة + توصيل فوري لجميع أحياء صنعاء</div>
+    <h1>وجهتك التقنية الأولى في <span>صنعاء</span> للأداء الاحترافي</h1>
+    <p>نوفر لك في متجر المدار للتكنولوجيا أحدث الشواحن والكابلات الأصلية، الكاميرات، اللابتوبات، ومعدات الشبكات والتخزين بأسعار منافسة وضمان موثوق.</p>
+    <div class="hero-actions">
+        <a href="#products-section" class="hero-btn">🛍️ تصفح المنتجات</a>
+        <a href="https://www.instagram.com/almadar.technology" target="_blank" class="social-hero-btn">📸 تابعنا على إنستغرام</a>
+        <a href="https://www.facebook.com/share/1coWXX68kv/" target="_blank" class="social-hero-btn">📘 صفحتنا على فيسبوك</a>
+    </div>
+</section>
+
+<div class="categories" id="products-section">
+    <button class="cat-btn active" onclick="setCat('الكل', this)">الكل</button>
+    <button class="cat-btn" onclick="setCat('شواحن وكابلات', this)">شواحن وكابلات</button>
+    <button class="cat-btn" onclick="setCat('كاميرات', this)">كاميرات ومراقبة</button>
+    <button class="cat-btn" onclick="setCat('لابتوبات', this)">لابتوبات</button>
+    <button class="cat-btn" onclick="setCat('شبكات', this)">أجهزة شبكات</button>
+    <button class="cat-btn" onclick="setCat('تخزين وملحقات', this)">تخزين وملحقات</button>
+</div>
+
+<main class="products-grid" id="products-grid"></main>
+
+<footer>
+    <div class="footer-title">⚡ متجر المدار للتكنولوجيا | صنعاء</div>
+    <p style="color: var(--text-muted); font-size: 0.9rem;">تواصل معنا وتابع أحدث العروض والمنتجات عبر صفحاتنا الرسمية:</p>
+    <div class="social-links">
+        <a href="https://www.instagram.com/almadar.technology" target="_blank" class="social-btn insta-btn">📸 تابعنا على Instagram</a>
+        <a href="https://www.facebook.com/share/1coWXX68kv/" target="_blank" class="social-btn fb-btn">📘 تابعنا على Facebook</a>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 10px;">جميع الحقوق محفوظة © متجر المدار للتكنولوجيا</p>
+</footer>
+
+<div class="modal" id="cart-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>🛒 سلة المشتريات</h3>
+            <button class="close-btn" onclick="toggleCart()">&times;</button>
+        </div>
+        <div id="cart-items"></div>
+        <div style="margin-top: 14px; font-weight: 900; font-size: 1.1rem; display: flex; justify-content: space-between;">
+            <span>الإجمالي:</span>
+            <span id="cart-total" style="color: var(--success);">0</span>
+        </div>
+        <div class="form-group">
+            <label>الاسم الكريم:</label>
+            <input type="text" id="cust-name" placeholder="أدخل اسمك">
+        </div>
+        <div class="form-group">
+            <label>منطقة التوصيل في صنعاء:</label>
+            <select id="cust-area">
+                <option value="حدة">حدة</option>
+                <option value="شارع الستين">شارع الستين</option>
+                <option value="الأصبحي">الأصبحي</option>
+                <option value="حي الجامعة">حي الجامعة</option>
+                <option value="الحصبة">الحصبة</option>
+                <option value="شميلة">شميلة</option>
+                <option value="أخرى">منطقة أخرى (تحدد في الواتساب)</option>
+            </select>
+        </div>
+        <button class="whatsapp-btn" onclick="sendOrder()">إرسال الطلب عبر واتساب 💬</button>
+    </div>
+</div>
+
+<script>
+    const STORE_CONFIG = {
+        whatsappNumber: "967770000000", // ضع رقم واتساب المتجر هنا
+        instagramUrl: "https://www.instagram.com/almadar.technology",
+        facebookUrl: "https://www.facebook.com/share/1coWXX68kv/",
+        rates: { YER: 535, SAR: 3.75, USD: 1 },
+        symbols: { YER: "ر.ي", SAR: "ر.س", USD: "$" }
+    };
+
+    const PRODUCTS = [
+        { id: 1, name: "شاحن جداري Anker السريع 45W", cat: "شواحن وكابلات", priceUSD: 18, icon: "🔌", desc: "شحن فائق السرعة بتقنية GaN يدعم الهواتف والتابلت بأمان تام." },
+        { id: 2, name: "كابل شحن Type-C قماشي ضد القطع", cat: "شواحن وكابلات", priceUSD: 6, icon: "⚡", desc: "يدعم الشحن السريع 60W ونقل البيانات بطول 1.5 متر." },
+        { id: 3, name: "باور بانك Anker 20,000mAh", cat: "شواحن وكابلات", priceUSD: 35, icon: "🔋", desc: "شحن سريع بقوة 22.5 واط بمنفذين مع شاشة رقمية." },
+        { id: 4, name: "كاميرا مراقبة ذكية Wi-Fi 360°", cat: "كاميرات", priceUSD: 28, icon: "📷", desc: "دقة 2K مع رؤية ليلية واضحة وتتبع ذكي للحركة عبر الجوال." },
+        { id: 5, name: "كاميرا ويب احترافية Full HD 1080p", cat: "كاميرات", priceUSD: 22, icon: "🎥", desc: "مايكروفون مدمج عازل للضوضاء مثالية للاجتماعات والدراسة." },
+        { id: 6, name: "لابتوب Dell Latitude 7490", cat: "لابتوبات", priceUSD: 280, icon: "💻", desc: "معالج Core i7 الجيل الثامن، رام 16GB، تخزين 512GB SSD." },
+        { id: 7, name: "راوتر MikroTik hAP ac2", cat: "شبكات", priceUSD: 65, icon: "📡", desc: "راوتر احترافي ثنائي النطاق بـ 5 منافذ جيجابت لإدارة الشبكات." },
+        { id: 8, name: "هارد خارجي SSD Kingston 1TB", cat: "تخزين وملحقات", priceUSD: 75, icon: "💽", desc: "سرعة نقل فائقة USB 3.2 مقاوم للصدمات وحجم جيب." }
+    ];
+
+    let currentCat = "الكل";
+    let cart = [];
+
+    function toggleTheme() {
+        document.body.classList.toggle("light-mode");
+    }
+
+    function formatPrice(usd) {
+        const cur = document.getElementById("currency").value;
+        const val = Math.round(usd * STORE_CONFIG.rates[cur]);
+        return val.toLocaleString() + " " + STORE_CONFIG.symbols[cur];
+    }
+
+    function setCat(cat, btn) {
+        currentCat = cat;
+        document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderProducts();
+    }
+
+    function renderProducts() {
+        const q = document.getElementById("search").value.trim().toLowerCase();
+        const grid = document.getElementById("products-grid");
+        grid.innerHTML = "";
+
+        const filtered = PRODUCTS.filter(p =>
+            (currentCat === "الكل" || p.cat === currentCat) &&
+            (p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q))
+        );
+
+        filtered.forEach(p => {
+            grid.innerHTML += `
+                <div class="card">
                     <div>
-                        <div class="flex items-center gap-2">
-                            <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-                                المدار <span class="text-amber-500">للتكنولوجيا</span>
-                            </h1>
-                        </div>
-                        <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wider">
-                            AL-MADAR TECHNOLOGY STORE
-                        </p>
+                        <div class="card-cat">${p.cat}</div>
+                        <div class="card-icon">${p.icon}</div>
+                        <div class="card-title">${p.name}</div>
+                        <div class="card-desc">${p.desc}</div>
                     </div>
-                </a>
-
-                <!-- شريط البحث السريع (سطح المكتب) -->
-                <div class="hidden md:flex flex-1 max-w-md mx-4">
-                    <div class="relative w-full">
-                        <input 
-                            type="text" 
-                            id="desktopSearchInput"
-                            placeholder="ابحث عن لابتوب، راوتر، كابل، هارد SSD..." 
-                            class="w-full bg-slate-100 dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 rounded-xl py-2.5 pr-10 pl-4 text-sm border border-slate-300 dark:border-slate-700 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition"
-                        >
-                        <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3 text-slate-400"></i>
+                    <div class="card-footer">
+                        <span class="price">${formatPrice(p.priceUSD)}</span>
+                        <button class="add-btn" onclick="addToCart(${p.id})">+ أضف للسلة</button>
                     </div>
                 </div>
-
-                <!-- أدوات التحكم (العملة، المظهر، السلة) -->
-                <div class="flex items-center gap-2 sm:gap-3">
-                    
-                    <!-- محول العملة -->
-                    <div class="relative">
-                        <select 
-                            id="currencySelector" 
-                            aria-label="اختيار العملة"
-                            class="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs sm:text-sm font-bold rounded-xl py-2 px-2.5 sm:px-3 border border-slate-300 dark:border-slate-700 focus:outline-none focus:border-amber-500 cursor-pointer"
-                        >
-                            <option value="YER">🇾🇪 ريال يمني (ر.ي)</option>
-                            <option value="USD">🇺🇸 دولار ($)</option>
-                            <option value="SAR">🇸🇦 ريال سعودي (ر.س)</option>
-                        </select>
-                    </div>
-
-                    <!-- زر الوضع الليلي / النهاري -->
-                    <button 
-                        id="themeToggleBtn" 
-                        type="button"
-                        title="تغيير المظهر"
-                        class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center border border-slate-300 dark:border-slate-700 transition"
-                    >
-                        <i id="themeIcon" class="fa-solid fa-sun text-base"></i>
-                    </button>
-
-                    <!-- زر سلة المشتريات -->
-                    <button 
-                        id="openCartBtn" 
-                        type="button"
-                        class="relative flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-2 px-3.5 sm:px-4 rounded-xl shadow-md shadow-amber-500/20 transition active:scale-95"
-                    >
-                        <i class="fa-solid fa-cart-shopping text-base"></i>
-                        <span class="hidden sm:inline text-sm">السلة</span>
-                        <span id="cartCountBadge" class="bg-slate-950 text-amber-400 text-xs font-extrabold px-2 py-0.5 rounded-full min-w-[22px] text-center">
-                            0
-                        </span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- شريط البحث (للهواتف) -->
-            <div class="mt-3 md:hidden">
-                <div class="relative w-full">
-                    <input 
-                        type="text" 
-                        id="mobileSearchInput"
-                        placeholder="ابحث عن منتج (لابتوب، راوتر، شاحن، SSD)..." 
-                        class="w-full bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-xl py-2.5 pr-10 pl-4 text-sm border border-slate-300 dark:border-slate-700 focus:outline-none focus:border-amber-500"
-                    >
-                    <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3 text-slate-400"></i>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- القسم الترحيبي (Hero Section) -->
-    <section class="relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white py-10 sm:py-16 border-b border-slate-800">
-        <!-- خلفية تقنية زخرفية -->
-        <div class="absolute inset-0 opacity-15 pointer-events-none" style="background-image: radial-gradient(#f59e0b 1px, transparent 1px); background-size: 28px 28px;"></div>
-        <div class="absolute -top-24 -left-24 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-sky-500/15 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                
-                <!-- النص الترويجي -->
-                <div class="lg:col-span-7 text-center lg:text-right space-y-5">
-                    <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold">
-                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-                        <span>متوفر الآن توصيل فوري لجميع أحياء صنعاء 🚚</span>
-                    </div>
-
-                    <h2 class="text-3xl sm:text-5xl font-black leading-tight">
-                        وجهتك التقنية الأولى في <span class="text-transparent bg-clip-text bg-gradient-to-l from-amber-400 to-yellow-200">صنعاء</span> للأداء الاحترافي
-                    </h2>
-
-                    <p class="text-slate-300 text-sm sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                        نوفر لك في <strong class="text-white">متجر المدار للتكنولوجيا</strong> أحدث اللابتوبات، معدات الشبكات والاتصالات، وحدات التخزين السريعة، وإكسسوارات الكمبيوتر والجوال الأصلية بأسعار منافسة وضمان موثوق.
-                    </p>
-
-                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
-                        <a href="#productsSection" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl shadow-lg shadow-amber-500/25 transition flex items-center gap-2 text-sm sm:text-base">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                            <span>تصفح المنتجات الآن</span>
-                        </a>
-                        <button onclick="openDirectWhatsApp()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-5 py-3.5 rounded-xl shadow-lg shadow-emerald-600/20 transition flex items-center gap-2 text-sm sm:text-base">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                            <span>تواصل واستفسر عبر واتساب</span>
-                        </button>
-                    </div>
-
-                    <!-- مميزات المتجر السريعة -->
-                    <div class="grid grid-cols-3 gap-3 pt-4 border-t border-slate-800/80 max-w-lg mx-auto lg:mx-0">
-                        <div class="flex items-center gap-2 justify-center lg:justify-start">
-                            <i class="fa-solid fa-shield-halved text-amber-400 text-lg"></i>
-                            <span class="text-xs sm:text-sm text-slate-300 font-semibold">جودة مضمونة</span>
-                        </div>
-                        <div class="flex items-center gap-2 justify-center lg:justify-start">
-                            <i class="fa-solid fa-motorcycle text-sky-400 text-lg"></i>
-                            <span class="text-xs sm:text-sm text-slate-300 font-semibold">توصيل سريع بصنعاء</span>
-                        </div>
-                        <div class="flex items-center gap-2 justify-center lg:justify-start">
-                            <i class="fa-solid fa-headset text-emerald-400 text-lg"></i>
-                            <span class="text-xs sm:text-sm text-slate-300 font-semibold">دعم فني وتقني</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- بطاقة العرض التفاعلية في الهيرو -->
-                <div class="lg:col-span-5">
-                    <div class="bg-slate-800/70 border border-slate-700/80 rounded-3xl p-5 sm:p-6 shadow-2xl relative">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="bg-rose-500/20 text-rose-300 border border-rose-500/30 text-xs font-bold px-3 py-1 rounded-full">
-                                🔥 عروض المدار الأسبوعية
-                            </span>
-                            <span class="text-xs text-slate-400 font-mono">AL-MADAR TECH</span>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-3">
-                            <div onclick="filterByCategory('laptops')" class="cursor-pointer bg-slate-900/90 hover:bg-slate-900 border border-slate-700/70 hover:border-amber-500/60 p-4 rounded-2xl transition group">
-                                <div class="w-11 h-11 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center mb-3 group-hover:scale-110 transition">
-                                    <i class="fa-solid fa-laptop-code text-xl"></i>
-                                </div>
-                                <h3 class="font-bold text-sm sm:text-base text-white">لابتوبات وكمبيوتر</h3>
-                                <p class="text-xs text-slate-400 mt-1">أجهزة للبرمجة، التصميم، والأعمال</p>
-                            </div>
-
-                            <div onclick="filterByCategory('networking')" class="cursor-pointer bg-slate-900/90 hover:bg-slate-900 border border-slate-700/70 hover:border-sky-500/60 p-4 rounded-2xl transition group">
-                                <div class="w-11 h-11 rounded-xl bg-sky-500/15 text-sky-400 flex items-center justify-center mb-3 group-hover:scale-110 transition">
-                                    <i class="fa-solid fa-network-wired text-xl"></i>
-                                </div>
-                                <h3 class="font-bold text-sm sm:text-base text-white">شبكات واتصالات</h3>
-                                <p class="text-xs text-slate-400 mt-1">راوترات، سويتشات، وكابلات Cat6</p>
-                            </div>
-
-                            <div onclick="filterByCategory('peripherals')" class="cursor-pointer bg-slate-900/90 hover:bg-slate-900 border border-slate-700/70 hover:border-purple-500/60 p-4 rounded-2xl transition group">
-                                <div class="w-11 h-11 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center mb-3 group-hover:scale-110 transition">
-                                    <i class="fa-solid fa-microchip text-xl"></i>
-                                </div>
-                                <h3 class="font-bold text-sm sm:text-base text-white">هاردات وملحقات</h3>
-                                <p class="text-xs text-slate-400 mt-1">SSD NVMe، رامات، كيبورد وماوس</p>
-                            </div>
-
-                            <div onclick="filterByCategory('mobile')" class="cursor-pointer bg-slate-900/90 hover:bg-slate-900 border border-slate-700/70 hover:border-emerald-500/60 p-4 rounded-2xl transition group">
-                                <div class="w-11 h-11 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center mb-3 group-hover:scale-110 transition">
-                                    <i class="fa-solid fa-battery-full text-xl"></i>
-                                </div>
-                                <h3 class="font-bold text-sm sm:text-base text-white">إكسسوارات الجوال</h3>
-                                <p class="text-xs text-slate-400 mt-1">باور بانك، شواحن سريعة، وسماعات</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم المنتجات والفلترة -->
-    <main id="productsSection" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        
-        <!-- عنوان القسم وأزرار التصنيفات -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-            <div>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-                    <span class="w-2 h-7 bg-amber-500 rounded-full inline-block"></span>
-                    <span>قائمة المنتجات المتوفرة</span>
-                </h2>
-                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-                    اختر منتجاتك وأضفها للسلة أو اطلبها مباشرة عبر واتساب مع التوصيل في صنعاء
-                </p>
-            </div>
-
-            <!-- أزرار الفلترة حسب القسم -->
-            <div id="categoryPills" class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
-                <button data-category="all" class="category-btn active-cat whitespace-nowrap px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition bg-amber-500 text-slate-950 shadow-sm">
-                    <i class="fa-solid fa-border-all ml-1"></i> الكل
-                </button>
-                <button data-category="laptops" class="category-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700">
-                    <i class="fa-solid fa-laptop ml-1"></i> لابتوبات وكمبيوتر
-                </button>
-                <button data-category="networking" class="category-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700">
-                    <i class="fa-solid fa-wifi ml-1"></i> شبكات واتصالات
-                </button>
-                <button data-category="peripherals" class="category-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700">
-                    <i class="fa-solid fa-keyboard ml-1"></i> ملحقات وقطع غيار
-                </button>
-                <button data-category="mobile" class="category-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700">
-                    <i class="fa-solid fa-headphones ml-1"></i> إكسسوارات الجوال
-                </button>
-            </div>
-        </div>
-
-        <!-- عداد نتائج البحث -->
-        <div id="searchStatus" class="hidden mb-4 flex items-center justify-between bg-amber-500/10 border border-amber-500/30 rounded-xl px-4 py-2.5 text-sm">
-            <span id="searchStatusText" class="font-semibold text-amber-600 dark:text-amber-400"></span>
-            <button onclick="resetFilters()" class="text-xs font-bold underline text-slate-600 dark:text-slate-300 hover:text-amber-500">
-                إلغاء الفلترة وعرض الكل
-            </button>
-        </div>
-
-        <!-- شبكة عرض المنتجات -->
-        <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            <!-- يتم توليد البطاقات ديناميكياً عبر الجافاسكربت -->
-        </div>
-
-        <!-- حالة عدم وجود نتائج -->
-        <div id="emptyState" class="hidden text-center py-16 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 my-4">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 text-2xl">
-                <i class="fa-solid fa-box-open"></i>
-            </div>
-            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-200">لم نجد منتجاً يطابق بحثك</h3>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
-                جرب البحث بكلمات أخرى أو تواصل معنا مباشرة عبر واتساب لتوفير القطعة التي تبحث عنها.
-            </p>
-            <div class="mt-5 flex justify-center gap-3">
-                <button onclick="resetFilters()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-5 py-2.5 rounded-xl text-sm transition">
-                    عرض جميع المنتجات
-                </button>
-                <button onclick="openDirectWhatsApp('مرحباً متجر المدار، أبحث عن منتج غير معروض في الموقع: ')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition">
-                    <i class="fa-brands fa-whatsapp ml-1"></i> اسألنا عبر واتساب
-                </button>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- قسم لماذا تختار متجر المدار + طلب خاص -->
-    <section class="bg-white dark:bg-slate-900/70 border-t border-b border-slate-200 dark:border-slate-800 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-gradient-to-l from-slate-900 via-slate-900 to-sky-950 rounded-3xl p-6 sm:p-10 text-white border border-slate-800 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6">
-                <div class="space-y-2 text-center lg:text-right max-w-2xl">
-                    <span class="text-amber-400 text-xs sm:text-sm font-bold uppercase tracking-wider">خدمة الطلبات الخاصة للمؤسسات والأفراد</span>
-                    <h3 class="text-2xl sm:text-3xl font-extrabold">هل تبحث عن مواصفات لابتوب معينة أو تجهيز شبكة كاملة؟</h3>
-                    <p class="text-slate-300 text-sm sm:text-base">
-                        فريق متجر المدار للتكنولوجيا في صنعاء يوفر لك استشارة تقنية مجانية وتوفير طلبات الشركات، الكابلات، السويتشات، واللابتوبات بمواصفات خاصة.
-                    </p>
-                </div>
-                <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto justify-center">
-                    <button onclick="openDirectWhatsApp('مرحباً متجر المدار، أرغب في استشارة تقنية / طلب خاص: ')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2 whitespace-nowrap">
-                        <i class="fa-brands fa-whatsapp text-xl"></i>
-                        <span>اطلب مواصفاتك عبر واتساب</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- الفوتر (التذييل) -->
-    <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800 text-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-slate-800">
-                
-                <!-- عن المتجر -->
-                <div class="space-y-3">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-slate-800 border border-amber-500/40 flex items-center justify-center">
-                            <i class="fa-solid fa-microchip text-amber-400 text-lg"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-white font-extrabold text-base">متجر المدار للتكنولوجيا</h4>
-                            <p class="text-xs text-amber-400">Al-Madar Technology Store</p>
-                        </div>
-                    </div>
-                    <p class="text-xs sm:text-sm leading-relaxed text-slate-400">
-                        وجهتك الأولى لملحقات الكمبيوتر، اللابتوبات، وأجهزة الشبكات في صنعاء. نجمع لك بين الجودة الأصلية والسعر المنافس والتوصيل السريع.
-                    </p>
-                </div>
-
-                <!-- روابط سريعة -->
-                <div class="space-y-2">
-                    <h4 class="text-white font-bold text-base mb-3">الأقسام الرئيسية</h4>
-                    <ul class="space-y-2 text-xs sm:text-sm">
-                        <li><button onclick="filterByCategory('laptops')" class="hover:text-amber-400 transition">💻 اللابتوبات والكمبيوتر</button></li>
-                        <li><button onclick="filterByCategory('networking')" class="hover:text-amber-400 transition">🌐 معدات الشبكات والراوترات</button></li>
-                        <li><button onclick="filterByCategory('peripherals')" class="hover:text-amber-400 transition">⚡ وحدات التخزين SSD والملحقات</button></li>
-                        <li><button onclick="filterByCategory('mobile')" class="hover:text-amber-400 transition">🔋 شواحن وإكسسوارات الجوال</button></li>
-                    </ul>
-                </div>
-
-                <!-- التواصل والموقع -->
-                <div class="space-y-3">
-                    <h4 class="text-white font-bold text-base mb-3">تواصل معنا</h4>
-                    <p class="flex items-center gap-2 text-xs sm:text-sm">
-                        <i class="fa-solid fa-location-dot text-amber-400 w-5"></i>
-                        <span>الجمهورية اليمنية - صنعاء (توصيل لكافة المناطق)</span>
-                    </p>
-                    <p class="flex items-center gap-2 text-xs sm:text-sm">
-                        <i class="fa-solid fa-clock text-amber-400 w-5"></i>
-                        <span>السبت - الخميس: 9:00 صباحاً حتى 10:00 مساءً</span>
-                    </p>
-                    <div class="flex items-center gap-3 pt-2">
-                        <a href="https://www.instagram.com/almadar.technology" target="_blank" title="إنستغرام" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-gradient-to-tr hover:from-amber-500 hover:to-pink-600 text-white flex items-center justify-center transition">
-                            <i class="fa-brands fa-instagram text-lg"></i>
-                        </a>
-                        <button onclick="openDirectWhatsApp()" title="واتساب" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-emerald-600 text-white flex items-center justify-center transition">
-                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                        </button>
-                        <a href="#productsSection" title="المتجر" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-sky-600 text-white flex items-center justify-center transition">
-                            <i class="fa-solid fa-store text-base"></i>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
-                <p>© 2026 متجر المدار للتكنولوجيا (Al-Madar Technology Store) - صنعاء. جميع الحقوق محفوظة.</p>
-                <p>تطوير وإدارة تقنية باحترافية ⚡</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- نافذة سلة المشتريات الجانبية (Slide-Over Cart Drawer) -->
-    <div id="cartModal" class="fixed inset-0 z-50 hidden">
-        <!-- الخلفية المعتمة -->
-        <div id="cartBackdrop" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm transition-opacity"></div>
-
-        <div class="fixed inset-y-0 left-0 max-w-full flex pl-0 sm:pl-6">
-            <div class="w-screen max-w-md bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-2xl flex flex-col justify-between border-r border-slate-200 dark:border-slate-800">
-                
-                <!-- رأس السلة -->
-                <div class="p-4 sm:p-5 bg-slate-100 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-9 h-9 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-extrabold text-base sm:text-lg">سلة المشتريات</h3>
-                            <p id="cartHeaderSub" class="text-xs text-slate-500 dark:text-slate-400">جهز طلبك وأرسله فوراً عبر واتساب</p>
-                        </div>
-                    </div>
-                    <button id="closeCartBtn" class="w-9 h-9 rounded-xl bg-slate-200 dark:bg-slate-700 hover:bg-rose-500 hover:text-white flex items-center justify-center transition">
-                        <i class="fa-solid fa-xmark text-lg"></i>
-                    </button>
-                </div>
-
-                <!-- قائمة العناصر داخل السلة -->
-                <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-4 space-y-3">
-                    <!-- يتم تعبئتها ديناميكياً -->
-                </div>
-
-                <!-- تذييل السلة وبيانات التوصيل في صنعاء -->
-                <div id="cartFooter" class="p-4 sm:p-5 bg-slate-50 dark:bg-slate-800/60 border-t border-slate-200 dark:border-slate-800 space-y-3">
-                    
-                    <!-- بيانات العميل للتوصيل -->
-                    <div class="space-y-2.5">
-                        <p class="text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
-                            <i class="fa-solid fa-truck-fast"></i>
-                            <span>بيانات التوصيل السريع في صنعاء:</span>
-                        </p>
-                        
-                        <input 
-                            type="text" 
-                            id="customerName" 
-                            placeholder="الاسم الكريم (اختياري)" 
-                            class="w-full bg-white dark:bg-slate-900 rounded-xl px-3.5 py-2 text-xs sm:text-sm border border-slate-300 dark:border-slate-700 focus:outline-none focus:border-amber-500"
-                        >
-
-                        <div class="grid grid-cols-2 gap-2">
-                            <select 
-                                id="deliveryArea" 
-                                class="w-full bg-white dark:bg-slate-900 rounded-xl px-3 py-2 text-xs sm:text-sm border border-slate-300 dark:border-slate-700 focus:outline-none focus:border-amber-500"
-                            >
-                                <option value="صنعاء - تحديد العنوان عبر واتساب">📍 اختر المنطقة بصنعاء...</option>
-                                <option value="حدة">حدة / شارع حدة</option>
-                                <option value="الستين">شارع الستين</option>
-                                <option value="الأصبحي">الأصبحي / المقالح</option>
-                                <option value="بيت بوس">بيت بوس / الحي السياسي</option>
-                                <option value="الجامعة">حي الجامعة / الدائري</option>
-                                <option value="التحرير">التحرير / شارع صخر</option>
-                                <option value="الحصبة">الحصبة / شارع مازدا</option>
-                                <option value="شملان">شملان / مذبح</option>
-                                <option value="دارس">دارس / المطار</option>
-                                <option value="الجراف">الجراف / الثورة</option>
-                                <option value="سعوان">سعوان / شيراتون</option>
-                                <option value="أخرى داخل صنعاء">منطقة أخرى في صنعاء</option>
-                            </select>
-
-                            <input 
-                                type="text" 
-                                id="customerNotes" 
-                                placeholder="ملاحظة أو معلم قريب..." 
-                                class="w-full bg-white dark:bg-slate-900 rounded-xl px-3 py-2 text-xs sm:text-sm border border-slate-300 dark:border-slate-700 focus:outline-none focus:border-amber-500"
-                            >
-                        </div>
-                    </div>
-
-                    <!-- ملخص الفاتورة -->
-                    <div class="pt-2 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between">
-                        <span class="text-sm font-bold text-slate-600 dark:text-slate-300">الإجمالي التقديري:</span>
-                        <span id="cartTotalAmount" class="text-lg sm:text-xl font-black text-amber-600 dark:text-amber-400">0 ر.ي</span>
-                    </div>
-
-                    <!-- أزرار إتمام الطلب -->
-                    <div class="flex gap-2 pt-1">
-                        <button 
-                            onclick="checkoutViaWhatsApp()" 
-                            class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3 px-4 rounded-xl shadow-lg shadow-emerald-600/25 transition flex items-center justify-center gap-2 text-sm sm:text-base"
-                        >
-                            <i class="fa-brands fa-whatsapp text-xl"></i>
-                            <span>إرسال الطلب عبر واتساب</span>
-                        </button>
-                        <button 
-                            onclick="clearCart()" 
-                            title="إفراغ السلة"
-                            class="px-3.5 py-3 rounded-xl bg-slate-200 dark:bg-slate-700 hover:bg-rose-500 hover:text-white text-slate-700 dark:text-slate-300 transition text-sm font-bold"
-                        >
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- إشعار منبثق (Toast Notification) بدلاً من alert -->
-    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 pointer-events-none transition-all duration-300 bg-slate-900 text-white border border-amber-500/50 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3">
-        <div class="w-8 h-8 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold">
-            <i class="fa-solid fa-check"></i>
-        </div>
-        <span id="toastMessage" class="text-xs sm:text-sm font-bold">تمت الإضافة إلى السلة بنجاح!</span>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- الكود البرمجي وإدارة المتجر (JavaScript) -->
-    <!-- ========================================== -->
-    <script>
-        /**
-         * ⚙️ إعدادات متجر المدار السريعة (قابلة للتعديل بسهولة من مكان واحد)
-         * ضع رقم الواتساب الخاص بالمتجر هنا بصيغة دولية بدون (+) أو أصفار في البداية
-         */
-        const STORE_CONFIG = {
-            storeName: "متجر المدار للتكنولوجيا",
-            whatsappNumber: "967770000000", // <-- عدل رقم واتساب المتجر هنا (مثال: 96777xxxxxxx)
-            instagramUrl: "https://www.instagram.com/almadar.technology",
-            // أسعار الصرف التقريبية مقارنة بالدولار لسهولة تحديث الأسعار تلقائياً
-            exchangeRates: {
-                USD: { rate: 1, symbol: "$", name: "دولار" },
-                YER: { rate: 535, symbol: "ر.ي", name: "ريال يمني" },
-                SAR: { rate: 3.75, symbol: "ر.س", name: "ريال سعودي" }
-            }
-        };
-
-        /**
-         * 📦 قاعدة بيانات المنتجات (يمكنك إضافة أو تعديل أي منتج أو سعره بالدولار هنا)
-         * ويتكفل الموقع بحساب السعر بالريال اليمني أو السعودي تلقائياً!
-         */
-        const PRODUCTS_DATA = [
-            {
-                id: "p1",
-                name: "لابتوب Dell Latitude 7490 احترافي",
-                category: "laptops",
-                categoryLabel: "لابتوبات وكمبيوتر",
-                priceUSD: 290,
-                badge: "الأكثر مبيعاً",
-                badgeColor: "bg-amber-500 text-slate-950",
-                icon: "fa-solid fa-laptop",
-                specs: "Core i7 الجيل الثامن • رام 16GB DDR4 • هارد 512GB NVMe SSD • شاشة 14 FHD",
-                inStock: true
-            },
-            {
-                id: "p2",
-                name: "لابتوب HP EliteBook 840 G6",
-                category: "laptops",
-                categoryLabel: "لابتوبات وكمبيوتر",
-                priceUSD: 320,
-                badge: "نظافة وكالة",
-                badgeColor: "bg-sky-500 text-white",
-                icon: "fa-solid fa-laptop-code",
-                specs: "Core i7-8565U • رام 16GB • هارد 512GB SSD • هيكل معدني أنيق وبطارية ممتازة",
-                inStock: true
-            },
-            {
-                id: "p3",
-                name: "راوتر TP-Link Archer C6 Gigabit",
-                category: "networking",
-                categoryLabel: "شبكات واتصالات",
-                priceUSD: 38,
-                badge: "تغطية قوية",
-                badgeColor: "bg-emerald-500 text-white",
-                icon: "fa-solid fa-wifi",
-                specs: "ثنائي النطاق AC1200 • 4 هوائيات خارجية • منافذ Gigabit كاملة • يدعم MU-MIMO",
-                inStock: true
-            },
-            {
-                id: "p4",
-                name: "سويتش شبكات TP-Link 8-Port Gigabit",
-                category: "networking",
-                categoryLabel: "شبكات واتصالات",
-                priceUSD: 22,
-                badge: "عملي للشركات",
-                badgeColor: "bg-indigo-500 text-white",
-                icon: "fa-solid fa-network-wired",
-                specs: "8 منافذ بسرعة 10/100/1000Mbps • هيكل معدني متين • تشغيل فوري Plug & Play",
-                inStock: true
-            },
-            {
-                id: "p5",
-                name: "هارد داخلي Kingston NV2 500GB M.2 NVMe",
-                category: "peripherals",
-                categoryLabel: "ملحقات وقطع غيار",
-                priceUSD: 42,
-                badge: "سرعة فائقة",
-                badgeColor: "bg-amber-500 text-slate-950",
-                icon: "fa-solid fa-hard-drive",
-                specs: "PCIe 4.0 NVMe • سرعة قراءة تصل إلى 3500MB/s • يضاعف سرعة اللابتوب والكمبيوتر",
-                inStock: true
-            },
-            {
-                id: "p6",
-                name: "رام لابتوب Crucial 8GB DDR4 3200MHz",
-                category: "peripherals",
-                categoryLabel: "ملحقات وقطع غيار",
-                priceUSD: 20,
-                badge: "أصلي مضمون",
-                badgeColor: "bg-purple-500 text-white",
-                icon: "fa-solid fa-memory",
-                specs: "SODIMM DDR4 • سرعة 3200MHz • متوافق مع أغلب اللابتوبات الحديثة لتسريع الأداء",
-                inStock: true
-            },
-            {
-                id: "p7",
-                name: "كيبورد ميكانيكي للألعاب والبرمجة RGB",
-                category: "peripherals",
-                categoryLabel: "ملحقات وقطع غيار",
-                priceUSD: 28,
-                badge: "جديد",
-                badgeColor: "bg-rose-500 text-white",
-                icon: "fa-solid fa-keyboard",
-                specs: "مفاتيح ميكانيكية سريعة الاستجابة • إضاءة خلفية متعددة الأنماط • ضد التداخل",
-                inStock: true
-            },
-            {
-                id: "p8",
-                name: "ماوس لاسلكي احترافي Logitech M185",
-                category: "peripherals",
-                categoryLabel: "ملحقات وقطع غيار",
-                priceUSD: 12,
-                badge: "الأكثر طلباً",
-                badgeColor: "bg-amber-500 text-slate-950",
-                icon: "fa-solid fa-computer-mouse",
-                specs: "اتصال لاسلكي 2.4GHz مستقر • عمر بطارية يصل لـ 12 شهراً • مريح لليد",
-                inStock: true
-            },
-            {
-                id: "p9",
-                name: "باور بانك Anker 20,000mAh شحن سريع PD",
-                category: "mobile",
-                categoryLabel: "إكسسوارات الجوال",
-                priceUSD: 35,
-                badge: "قوة تحمل",
-                badgeColor: "bg-emerald-500 text-white",
-                icon: "fa-solid fa-car-battery",
-                specs: "سعة 20000 ملي أمبير • منفذ Type-C PD بقوة 22.5W • يشحن الهاتف 4-5 مرات",
-                inStock: true
-            },
-            {
-                id: "p10",
-                name: "أكسس بوينت MikroTik hAP ac2 للأنظمة والشبكات",
-                category: "networking",
-                categoryLabel: "شبكات واتصالات",
-                priceUSD: 68,
-                badge: "للمهندسين",
-                badgeColor: "bg-sky-600 text-white",
-                icon: "fa-solid fa-tower-broadcast",
-                specs: "معالج رباعي النواة • 5 منافذ Gigabit • نظام RouterOS المتقدم لإدارة الشبكات",
-                inStock: true
-            },
-            {
-                id: "p11",
-                name: "سماعة بلوتوث لاسلكية عازلة للضوضاء TWS",
-                category: "mobile",
-                categoryLabel: "إكسسوارات الجوال",
-                priceUSD: 18,
-                badge: "عرض خاص",
-                badgeColor: "bg-rose-500 text-white",
-                icon: "fa-solid fa-headphones-simple",
-                specs: "بلوتوث 5.3 • مايكروفون نقي للمكالمات • بطارية تدوم طويلاً مع علبة الشحن",
-                inStock: true
-            },
-            {
-                id: "p12",
-                name: "كابل شبكة Cat6 نقي (لفة / بالأمتار) + أراجي",
-                category: "networking",
-                categoryLabel: "شبكات واتصالات",
-                priceUSD: 15,
-                badge: "جودة عالية",
-                badgeColor: "bg-indigo-500 text-white",
-                icon: "fa-solid fa-ethernet",
-                specs: "نقل بيانات بسرعة Gigabit بدون تقطيع • مقاوم للعوامل الجوية • متوفر كبس وتجهيز",
-                inStock: true
-            }
-        ];
-
-        // حالة التطبيق
-        let currentCurrency = localStorage.getItem("madar_currency") || "YER";
-        let currentCategory = "all";
-        let searchQuery = "";
-        let cart = JSON.parse(localStorage.getItem("madar_cart") || "[]");
-
-        // عناصر DOM
-        const productsGrid = document.getElementById("productsGrid");
-        const emptyState = document.getElementById("emptyState");
-        const currencySelector = document.getElementById("currencySelector");
-        const desktopSearchInput = document.getElementById("desktopSearchInput");
-        const mobileSearchInput = document.getElementById("mobileSearchInput");
-        const searchStatus = document.getElementById("searchStatus");
-        const searchStatusText = document.getElementById("searchStatusText");
-        const cartCountBadge = document.getElementById("cartCountBadge");
-        const cartModal = document.getElementById("cartModal");
-        const cartItemsContainer = document.getElementById("cartItemsContainer");
-        const cartTotalAmount = document.getElementById("cartTotalAmount");
-        const themeToggleBtn = document.getElementById("themeToggleBtn");
-        const themeIcon = document.getElementById("themeIcon");
-
-        // دالة تنسيق السعر حسب العملة المختارة
-        function formatPrice(priceUSD) {
-            const currencyObj = STORE_CONFIG.exchangeRates[currentCurrency];
-            const converted = Math.round(priceUSD * currencyObj.rate);
-            return `${converted.toLocaleString('en-US')} ${currencyObj.symbol}`;
-        }
-
-        // عرض المنتجات في الشبكة
-        function renderProducts() {
-            const filtered = PRODUCTS_DATA.filter(item => {
-                const matchesCategory = currentCategory === "all" || item.category === currentCategory;
-                const q = searchQuery.trim().toLowerCase();
-                const matchesSearch = !q || 
-                    item.name.toLowerCase().includes(q) || 
-                    item.specs.toLowerCase().includes(q) || 
-                    item.categoryLabel.toLowerCase().includes(q);
-                return matchesCategory && matchesSearch;
-            });
-
-            // تحديث شريط حالة البحث
-            if (searchQuery.trim() !== "" || currentCategory !== "all") {
-                searchStatus.classList.remove("hidden");
-                searchStatusText.textContent = `عرض ${filtered.length} منتج من أصل ${PRODUCTS_DATA.length}`;
-            } else {
-                searchStatus.classList.add("hidden");
-            }
-
-            if (filtered.length === 0) {
-                productsGrid.innerHTML = "";
-                emptyState.classList.remove("hidden");
-                return;
-            }
-
-            emptyState.classList.add("hidden");
-            productsGrid.innerHTML = filtered.map(product => `
-                <div class="product-card bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl flex flex-col justify-between">
-                    
-                    <div>
-                        <!-- رأس البطاقة والأيقونة -->
-                        <div class="relative h-44 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800/90 dark:to-slate-900 flex items-center justify-center p-6 border-b border-slate-100 dark:border-slate-800/80">
-                            <span class="absolute top-3 right-3 ${product.badgeColor} text-[11px] font-extrabold px-2.5 py-1 rounded-lg shadow-sm">
-                                ${product.badge}
-                            </span>
-                            <span class="absolute top-3 left-3 bg-slate-900/10 dark:bg-white/10 text-slate-600 dark:text-slate-300 text-[11px] font-semibold px-2.5 py-1 rounded-lg">
-                                ${product.categoryLabel}
-                            </span>
-                            <div class="w-20 h-20 rounded-2xl bg-white dark:bg-slate-800 shadow-md flex items-center justify-center text-amber-500 text-4xl border border-slate-200/60 dark:border-slate-700">
-                                <i class="${product.icon}"></i>
-                            </div>
-                        </div>
-
-                        <!-- تفاصيل المنتج -->
-                        <div class="p-4 sm:p-5">
-                            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white leading-snug mb-2">
-                                ${product.name}
-                            </h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed min-h-[38px]">
-                                ${product.specs}
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- السعر وأزرار الشراء -->
-                    <div class="px-4 pb-4 sm:px-5 sm:pb-5 pt-2 border-t border-slate-100 dark:border-slate-800/60 space-y-3">
-                        <div class="flex items-baseline justify-between">
-                            <span class="text-xs text-slate-400 font-medium">السعر:</span>
-                            <span class="text-lg sm:text-xl font-black text-amber-600 dark:text-amber-400">
-                                ${formatPrice(product.priceUSD)}
-                            </span>
-                        </div>
-
-                        <div class="grid grid-cols-5 gap-2">
-                            <button 
-                                onclick="addToCart('${product.id}')" 
-                                class="col-span-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold py-2.5 px-3 rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-1.5 shadow-sm active:scale-95"
-                            >
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>أضف للسلة</span>
-                            </button>
-                            <button 
-                                onclick="quickOrderProduct('${product.id}')" 
-                                class="col-span-2 bg-emerald-600/15 hover:bg-emerald-600 text-emerald-600 dark:text-emerald-400 hover:text-white border border-emerald-500/30 font-bold py-2.5 px-2 rounded-xl text-xs transition flex items-center justify-center gap-1"
-                                title="طلب فوري عبر واتساب"
-                            >
-                                <i class="fa-brands fa-whatsapp text-sm"></i>
-                                <span>طلب فوري</span>
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-            `).join('');
-        }
-
-        // إضافة منتج إلى السلة
-        function addToCart(productId) {
-            const product = PRODUCTS_DATA.find(p => p.id === productId);
-            if (!product) return;
-
-            const existingItem = cart.find(item => item.id === productId);
-            if (existingItem) {
-                existingItem.qty += 1;
-            } else {
-                cart.push({ id: product.id, qty: 1 });
-            }
-
-            saveAndRefreshCart();
-            showToast(`تمت إضافة "${product.name}" إلى السلة`);
-        }
-
-        // تعديل الكمية داخل السلة
-        function updateQty(productId, delta) {
-            const itemIndex = cart.findIndex(item => item.id === productId);
-            if (itemIndex === -1) return;
-
-            cart[itemIndex].qty += delta;
-            if (cart[itemIndex].qty <= 0) {
-                cart.splice(itemIndex, 1);
-            }
-            saveAndRefreshCart();
-        }
-
-        // إفراغ السلة
-        function clearCart() {
-            cart = [];
-            saveAndRefreshCart();
-            showToast("تم إفراغ السلة");
-        }
-
-        // حفظ السلة وتحديث الواجهة
-        function saveAndRefreshCart() {
-            localStorage.setItem("madar_cart", JSON.stringify(cart));
-            
-            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-            cartCountBadge.textContent = totalItems;
-
-            renderCartDrawer();
-        }
-
-        // رسم عناصر السلة الجانبية
-        function renderCartDrawer() {
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = `
-                    <div class="text-center py-12 space-y-3">
-                        <div class="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-400 mx-auto flex items-center justify-center text-2xl">
-                            <i class="fa-solid fa-basket-shopping"></i>
-                        </div>
-                        <p class="font-bold text-slate-700 dark:text-slate-300">سلة المشتريات فارغة حالياً</p>
-                        <p class="text-xs text-slate-500">تصفح المنتجات وأضف ما يعجبك لإرسال طلبك بسرعة.</p>
-                    </div>
-                `;
-                cartTotalAmount.textContent = formatPrice(0);
-                return;
-            }
-
-            let totalUSD = 0;
-            cartItemsContainer.innerHTML = cart.map(cartItem => {
-                const product = PRODUCTS_DATA.find(p => p.id === cartItem.id);
-                if (!product) return "";
-                const itemTotalUSD = product.priceUSD * cartItem.qty;
-                totalUSD += itemTotalUSD;
-
-                return `
-                    <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 flex items-center justify-between gap-3">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center text-lg shrink-0">
-                                <i class="${product.icon}"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white line-clamp-1">${product.name}</h4>
-                                <p class="text-xs text-amber-600 dark:text-amber-400 font-extrabold mt-0.5">
-                                    ${formatPrice(product.priceUSD)} × ${cartItem.qty} = ${formatPrice(itemTotalUSD)}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-1.5 bg-white dark:bg-slate-900 px-2 py-1 rounded-xl border border-slate-200 dark:border-slate-700">
-                            <button onclick="updateQty('${product.id}', 1)" class="w-6 h-6 rounded-lg hover:bg-amber-500 hover:text-slate-950 font-bold text-sm transition">+</button>
-                            <span class="text-xs font-extrabold px-1.5">${cartItem.qty}</span>
-                            <button onclick="updateQty('${product.id}', -1)" class="w-6 h-6 rounded-lg hover:bg-rose-500 hover:text-white font-bold text-sm transition">-</button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            cartTotalAmount.textContent = formatPrice(totalUSD);
-        }
-
-        // إرسال فاتورة السلة الكاملة عبر واتساب
-        function checkoutViaWhatsApp() {
-            if (cart.length === 0) {
-                showToast("الرجاء إضافة منتج واحد على الأقل إلى السلة أولاً");
-                return;
-            }
-
-            const customerName = document.getElementById("customerName").value.trim() || "عميل متجر المدار";
-            const deliveryArea = document.getElementById("deliveryArea").value;
-            const customerNotes = document.getElementById("customerNotes").value.trim();
-
-            let totalUSD = 0;
-            let itemsLines = cart.map((item, idx) => {
-                const product = PRODUCTS_DATA.find(p => p.id === item.id);
-                const subUSD = product.priceUSD * item.qty;
-                totalUSD += subUSD;
-                return `${idx + 1}. *${product.name}*\n   الكمية: ${item.qty} | السعر: ${formatPrice(subUSD)}`;
-            }).join('\n\n');
-
-            const message = 
-`🛒 *طلب جديد من موقع متجر المدار للتكنولوجيا*
-----------------------------------
-👤 *العميل:* ${customerName}
-📍 *منطقة التوصيل (صنعاء):* ${deliveryArea}
-${customerNotes ? `📝 *ملاحظات العنوان:* ${customerNotes}\n` : ''}----------------------------------
-📦 *المنتجات المطلوبة:*
-${itemsLines}
-
-----------------------------------
-💰 *الإجمالي التقديري:* *${formatPrice(totalUSD)}*
-يرجى تأكيد الطلب وتفاصيل التوصيل 🚚`;
-
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodedMessage}`, "_blank");
-        }
-
-        // طلب سريع لمنتج واحد مباشرة عبر واتساب
-        function quickOrderProduct(productId) {
-            const product = PRODUCTS_DATA.find(p => p.id === productId);
-            if (!product) return;
-
-            const message = 
-`مرحباً *متجر المدار للتكنولوجيا* 👋
-أرغب في طلب المنتج التالي من موقعكم:
-📦 *${product.name}*
-💰 السعر المعروض: *${formatPrice(product.priceUSD)}*
-📍 التوصيل داخل صنعاء. هل المنتج متوفر حالياً؟`;
-
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodedMessage}`, "_blank");
-        }
-
-        // فتح محادثة واتساب عامة للاستفسار
-        function openDirectWhatsApp(customText) {
-            const text = customText || "مرحباً متجر المدار للتكنولوجيا، لدي استفسار بخصوص المنتجات المتوفرة لديكم في صنعاء:";
-            window.open(`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(text)}`, "_blank");
-        }
-
-        // الفلترة حسب القسم
-        function filterByCategory(category) {
-            currentCategory = category;
-            
-            document.querySelectorAll(".category-btn").forEach(btn => {
-                if (btn.dataset.category === category) {
-                    btn.className = "category-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition bg-amber-500 text-slate-950 shadow-sm";
-                } else {
-                    btn.className = "category-btn whitespace-nowrap px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700";
-                }
-            });
-
-            renderProducts();
-            document.getElementById("productsSection").scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-
-        // إعادة تعيين البحث والفلاتر
-        function resetFilters() {
-            currentCategory = "all";
-            searchQuery = "";
-            desktopSearchInput.value = "";
-            mobileSearchInput.value = "";
-            filterByCategory("all");
-        }
-
-        // إشعار Toast أنيق
-        let toastTimeout;
-        function showToast(message) {
-            const toast = document.getElementById("toastNotification");
-            const toastMsg = document.getElementById("toastMessage");
-            toastMsg.textContent = message;
-            toast.classList.remove("translate-y-24", "opacity-0");
-            
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toast.classList.add("translate-y-24", "opacity-0");
-            }, 2800);
-        }
-
-        // تهيئة الأحداث عند تحميل الصفحة
-        window.addEventListener("DOMContentLoaded", () => {
-            // ضبط العملة المحفوظة
-            currencySelector.value = currentCurrency;
-            currencySelector.addEventListener("change", (e) => {
-                currentCurrency = e.target.value;
-                localStorage.setItem("madar_currency", currentCurrency);
-                renderProducts();
-                renderCartDrawer();
-            });
-
-            // أحداث أزرار الأقسام
-            document.querySelectorAll(".category-btn").forEach(btn => {
-                btn.addEventListener("click", () => {
-                    filterByCategory(btn.dataset.category);
-                });
-            });
-
-            // أحداث البحث الفوري
-            const handleSearch = (e) => {
-                searchQuery = e.target.value;
-                desktopSearchInput.value = searchQuery;
-                mobileSearchInput.value = searchQuery;
-                renderProducts();
-            };
-            desktopSearchInput.addEventListener("input", handleSearch);
-            mobileSearchInput.addEventListener("input", handleSearch);
-
-            // فتح وإغلاق السلة
-            document.getElementById("openCartBtn").addEventListener("click", () => {
-                cartModal.classList.remove("hidden");
-            });
-            document.getElementById("closeCartBtn").addEventListener("click", () => {
-                cartModal.classList.add("hidden");
-            });
-            document.getElementById("cartBackdrop").addEventListener("click", () => {
-                cartModal.classList.add("hidden");
-            });
-
-            // تبديل الوضع الليلي والنهاري
-            themeToggleBtn.addEventListener("click", () => {
-                const htmlEl = document.documentElement;
-                htmlEl.classList.toggle("dark");
-                const isDark = htmlEl.classList.contains("dark");
-                themeIcon.className = isDark ? "fa-solid fa-sun text-base" : "fa-solid fa-moon text-base";
-            });
-
-            // التشغيل الأولي
-            renderProducts();
-            saveAndRefreshCart();
+            `;
         });
-    </script>
+    }
+
+    function addToCart(id) {
+        const item = cart.find(i => i.id === id);
+        if (item) item.qty++;
+        else {
+            const p = PRODUCTS.find(x => x.id === id);
+            cart.push({ ...p, qty: 1 });
+        }
+        updateCartUI();
+    }
+
+    function changeQty(id, delta) {
+        const item = cart.find(i => i.id === id);
+        if (!item) return;
+        item.qty += delta;
+        if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        document.getElementById("cart-count").innerText = cart.reduce((s, i) => s + i.qty, 0);
+        const container = document.getElementById("cart-items");
+        container.innerHTML = cart.length === 0 ? "<p style='color:var(--text-muted);'>السلة فارغة حالياً.</p>" : "";
+
+        let totalUSD = 0;
+        cart.forEach(i => {
+            totalUSD += i.priceUSD * i.qty;
+            container.innerHTML += `
+                <div class="cart-item">
+                    <div>
+                        <strong>${i.name}</strong><br>
+                        <small style="color:var(--text-muted)">${formatPrice(i.priceUSD)} × ${i.qty}</small>
+                    </div>
+                    <div class="qty-btns">
+                        <button onclick="changeQty(${i.id}, 1)">+</button>
+                        <button onclick="changeQty(${i.id}, -1)">-</button>
+                    </div>
+                </div>
+            `;
+        });
+        document.getElementById("cart-total").innerText = formatPrice(totalUSD);
+    }
+
+    function toggleCart() {
+        document.getElementById("cart-modal").classList.toggle("open");
+    }
+
+    function sendOrder() {
+        if (cart.length === 0) return alert("يرجى إضافة منتجات إلى السلة أولاً!");
+        const name = document.getElementById("cust-name").value.trim() || "عميل المدار";
+        const area = document.getElementById("cust-area").value;
+
+        let msg = `*طلب جديد - متجر المدار للتكنولوجيا* ⚡\n`;
+        msg += `👤 *العميل:* ${name}\n📍 *المنطقة:* صنعاء - ${area}\n------------------\n`;
+        let totalUSD = 0;
+        cart.forEach(i => {
+            totalUSD += i.priceUSD * i.qty;
+            msg += `▪️ ${i.name} (العدد: ${i.qty}) - ${formatPrice(i.priceUSD * i.qty)}\n`;
+        });
+        msg += `------------------\n💰 *الإجمالي:* ${formatPrice(totalUSD)}`;
+
+        const url = `https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`;
+        window.open(url, "_blank");
+    }
+
+    renderProducts();
+</script>
 </body>
 </html>
